@@ -1,11 +1,11 @@
 import React, { useRef, useState } from "react";
 
-import { useHistory } from "react-router-dom";
+import {Link, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { authActions } from "../../store/auth-slice";
 import { Button, Card, Col, Container, Form, Row } from "react-bootstrap";
 
-export default function Login() {
+const Login = () => {
   const history = useHistory();
 
   const emailRef = useRef();
@@ -46,7 +46,7 @@ export default function Login() {
     )
       .then((res) => {
         confirmPassword(true);
-        alert("Sucessfull!");
+        
         setIsLoading(false);
         if (res.ok) {
           return res.json();
@@ -66,6 +66,7 @@ export default function Login() {
           localStorage.setItem("token", data.idToken);
           dispatch(authActions.isLogin(data.idToken));
         }
+        alert("Sucessfull!");
 
         history.replace("./home");
       })
@@ -78,7 +79,7 @@ export default function Login() {
       <Container>
         <Row className="vh-100 d-flex justify-content-center align-items-center">
           <Col md={7} lg={5} xs={10}>
-            <Card className="px-5">
+            <Card className="form">
               <Card.Body className="mb-3 mt-md-4">
                 <h2 className="fw-bold mb-2 text-center text-uppercase ">
                   Login
@@ -119,9 +120,9 @@ export default function Login() {
                 </Form>
                 <p className="mb-0 mt-3 text-center">
                   Don't have an account??{" "}
-                  <a href="/register" className="text-success fw-bold">
+                  <Link to="/register" className="text-success fw-bold">
                     Register
-                  </a>
+                  </Link>
                 </p>
               </Card.Body>
             </Card>
@@ -131,3 +132,4 @@ export default function Login() {
     </>
   );
 }
+export default Login;

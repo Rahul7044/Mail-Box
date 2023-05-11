@@ -1,7 +1,8 @@
 import React, { useRef, useState } from "react";
 import { Col, Button, Row, Container, Card, Form } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
-export default function Registration() {
+const Registration =() =>{
   const emailRef = useRef();
   const passwordRef = useRef();
   const confirmPasswordRef = useRef();
@@ -68,7 +69,7 @@ export default function Registration() {
       <Container>
         <Row className="vh-100 d-flex justify-content-center align-items-center">
           <Col md={7} lg={5} xs={10}>
-            <Card className="px-5">
+            <Card className="form">
               <Card.Body className="mb-3 mt-md-4">
                 <h2 className="fw-bold mb-2 text-center text-uppercase ">
                   Register
@@ -122,9 +123,9 @@ export default function Registration() {
                 </Form>
                 <p className="mb-0 mt-3 text-center">
                   Already have an account??{" "}
-                  <a href="/login" className="text-success fw-bold">
+                  <Link to="/login" className="text-success fw-bold">
                     Sign In
-                  </a>
+                  </Link>
                 </p>
               </Card.Body>
             </Card>
@@ -134,3 +135,4 @@ export default function Registration() {
     </>
   );
 }
+export default Registration;
