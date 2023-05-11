@@ -5,6 +5,7 @@ import Login from "./components/Auth/Login";
 import Home from "./components/pages/Home";
 import { Redirect, Route, Switch } from "react-router-dom";
 import Layout from "./components/Layout/Layout";
+import Compose from "./components/Mail/Compose";
 
 function App() {
   const isLogin = useSelector((state) => state.auth.isLoggedIn);
@@ -46,6 +47,11 @@ function App() {
             <Route path="*">
               <Redirect to="/home" />
               <Home />
+            </Route>
+          )}
+          {isLogin && (
+            <Route path="/email">
+              <Compose />
             </Route>
           )}
         </Switch>

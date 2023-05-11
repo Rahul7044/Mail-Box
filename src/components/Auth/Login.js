@@ -66,6 +66,7 @@ const Login = () => {
           localStorage.setItem("token", data.idToken);
           dispatch(authActions.isLogin(data.idToken));
         }
+        localStorage.setItem("email", enteredEmail);
         alert("Sucessfull!");
 
         history.replace("./home");

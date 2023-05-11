@@ -47,9 +47,10 @@ const Registration =() =>{
         }
       ).then((res) => {
         confirmPassword(true);
-        confirmPassword("Sucessfull!");
+        
         setIsLoading(false);
         if (res.ok) {
+          alert("Success!");
           console.log(res);
           //
         } else {
