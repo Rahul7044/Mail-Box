@@ -1,11 +1,12 @@
 import React, { useRef, useState } from "react";
 import { Col, Button, Row, Container, Card, Form } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
-const Registration =() =>{
+export default function Registration() {
   const emailRef = useRef();
   const passwordRef = useRef();
   const confirmPasswordRef = useRef();
+  const history = useHistory();
 
   const [isLoading, setIsLoading] = useState(false);
   const [password, confirmPassword] = useState(true);
@@ -32,7 +33,7 @@ const Registration =() =>{
     if (enteredPassword === enteredConfirmPassword) {
       setIsLoading(true);
       fetch(
-        "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyABV3Ka88_JCZGivdh4xR89-n-S_BkTf1I",
+        "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyB1d_nqy6iG8ug3zuyzA3M6oDAdVtXP16Q",
         {
           method: "POST",
           body: JSON.stringify({
@@ -47,10 +48,10 @@ const Registration =() =>{
         }
       ).then((res) => {
         confirmPassword(true);
-        
         setIsLoading(false);
         if (res.ok) {
           alert("Success!");
+          history.push("/login");
           console.log(res);
           //
         } else {
@@ -115,7 +116,7 @@ const Registration =() =>{
                   </div>
 
                   <div className="text-center">
-                    <Button type="submit" variant="outline-success">
+                    <Button type="submit" variant="outline-dark">
                       Create Account
                     </Button>{" "}
                   </div>
@@ -124,7 +125,7 @@ const Registration =() =>{
                 </Form>
                 <p className="mb-0 mt-3 text-center">
                   Already have an account??{" "}
-                  <Link to="/login" className="text-success fw-bold">
+                  <Link to="/login" className="text-dark fw-bold">
                     Sign In
                   </Link>
                 </p>
@@ -136,4 +137,3 @@ const Registration =() =>{
     </>
   );
 }
-export default Registration;

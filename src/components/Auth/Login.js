@@ -1,11 +1,11 @@
 import React, { useRef, useState } from "react";
 
-import {Link, useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { authActions } from "../../store/auth-slice";
 import { Button, Card, Col, Container, Form, Row } from "react-bootstrap";
 
-const Login = () => {
+export default function Login() {
   const history = useHistory();
 
   const emailRef = useRef();
@@ -31,7 +31,7 @@ const Login = () => {
     setValidate(true);
     setIsLoading(true);
     fetch(
-      "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyABV3Ka88_JCZGivdh4xR89-n-S_BkTf1I",
+      "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyB1d_nqy6iG8ug3zuyzA3M6oDAdVtXP16Q",
       {
         method: "POST",
         body: JSON.stringify({
@@ -46,7 +46,6 @@ const Login = () => {
     )
       .then((res) => {
         confirmPassword(true);
-        
         setIsLoading(false);
         if (res.ok) {
           return res.json();
@@ -112,8 +111,8 @@ const Login = () => {
                   <div className="text-danger mb-3">{password}</div>
 
                   <div className="text-center">
-                    <Button type="submit" variant="outline-success">
-                       Login
+                    <Button type="submit" variant="outline-dark" size="md">
+                      Login
                     </Button>{" "}
                   </div>
 
@@ -121,10 +120,16 @@ const Login = () => {
                 </Form>
                 <p className="mb-0 mt-3 text-center">
                   Don't have an account??{" "}
-                  <Link to="/register" className="text-success fw-bold">
+                  <Link to="/register" className="fw-bold">
                     Register
                   </Link>
                 </p>
+                <Link
+                  className="d-flex justify-content-center align-items-center"
+                  to="/forgot"
+                >
+                  <i className="fw-bold pt-3">Forget password</i>
+                </Link>
               </Card.Body>
             </Card>
           </Col>
@@ -133,4 +138,3 @@ const Login = () => {
     </>
   );
 }
-export default Login;

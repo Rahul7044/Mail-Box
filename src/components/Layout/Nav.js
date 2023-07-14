@@ -1,4 +1,3 @@
-
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
@@ -6,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { authActions } from "../../store/auth-slice";
 
-const Header = () =>{
+function Header() {
   const history = useHistory();
   const isLogin = useSelector((state) => state.auth.isLoggedIn);
 
@@ -15,10 +14,11 @@ const Header = () =>{
   const logoutHandler = () => {
     dispatch(authActions.isLogout());
     localStorage.removeItem("token");
+    localStorage.removeItem("email");
   };
 
   return (
-    <Navbar collapseOnSelect expand="lg" variant="dark">
+    <Navbar collapseOnSelect expand="lg" variant="dark" bg="dark">
       <Container>
         <Navbar.Brand className="fw-bold" onClick={() => history.push("/")}>
           Mail Box Client

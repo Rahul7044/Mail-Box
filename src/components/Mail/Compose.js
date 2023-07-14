@@ -3,11 +3,14 @@ import { EditorState } from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { Card, Form, InputGroup } from "react-bootstrap";
+
 function Compose(props) {
   const emailRef = useRef();
   const subRef = useRef();
+
   const [value, editorValue] = useState(null);
   const [editorState, setEditorState] = useState(() =>
     EditorState.createEmpty()
@@ -25,11 +28,12 @@ function Compose(props) {
       email: email,
       subject: subject,
       message: value,
+      read: true,
     };
 
     try {
       const response = await fetch(
-        `https://react-http-efb57-default-rtdb.firebaseio.com//${replacedSenderMail}sentMailbox.json`,
+        `https://mail-box-client-18fab-default-rtdb.firebaseio.com/${replacedSenderMail}sentMailbox.json`,
         {
           method: "POST",
           body: JSON.stringify(mailData),
@@ -47,13 +51,14 @@ function Compose(props) {
     try {
       const mail = email.replace(/[@.]/g, "");
       const response = await fetch(
-        `https://react-http-efb57-default-rtdb.firebaseio.com//${mail}indbox.json`,
+        `https://mail-box-client-18fab-default-rtdb.firebaseio.com/${mail}indbox.json`,
         {
           method: "POST",
           body: JSON.stringify({
-            from: replacedSenderMail,
+            from: senderEmail,
             subject: subject,
             message: value,
+            read: true,
           }),
           headers: {
             "Content-Type": "application/json",
@@ -126,4 +131,5 @@ function Compose(props) {
     </div>
   );
 }
+
 export default Compose;
